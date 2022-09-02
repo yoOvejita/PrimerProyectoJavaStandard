@@ -2,6 +2,8 @@ package com.pepe;
 
 import java.util.Scanner;
 
+import com.pepe.animales.Animal;
+
 public class Principal {
 	static int num1, num2;
 	public static void main(String[] args) {
@@ -66,8 +68,55 @@ public class Principal {
 		hallarIntegralDeEcuacion("xyz", resultado);
 		hallarIntegralDeEcuacion("xyz", 33);
 		hallarIntegralDeEcuacion("xyz", resultado * 2);
+		
+		
+		//Usando objetos de la clase Animal
+		Animal mascota1 = new Animal();
+		System.out.println("Mi animal es: " + mascota1);
+		mascota1.comer();
+		mascota1.setCantidadPatas(2);
+		mascota1.setNombreEspecie("Loro");
+		System.out.println("Mi animal es: " + mascota1.getNombreEspecie());
+		
+		System.out.println("Mi animal es: " + mascota1);
+		
+		Animal mascota2 = new Animal();
+		mascota2.setCantidadPatas(2);
+		mascota2.setNombreEspecie("Loro");
+		
+		if(mascota1.equals(mascota2))
+			System.out.println("Efectivamente, son iguales.");
+		else
+			System.out.println("No son para nada iguales.");
+		
+		
+		//Otro ejemplo
+		Animal mascota3 = mascota1;
+		
+		mascota1.setNombreEspecie("Colibri");
+		if(mascota1.equals(mascota3))
+			System.out.println("Efectivamente, son iguales.");
+		else
+			System.out.println("No son para nada iguales.");
+		
+		//Pâsando un animal por referencia (a un método)
+		System.out.println("Mi animal es: " + mascota3);
+		haciendoAlgoConUnObjeto(mascota3);
+		System.out.println("Mi animal es: " + mascota3);
+		
 	}
 	
+	private static void haciendoAlgoConUnObjeto(Animal mm) {
+		Animal aux = new Animal();
+		aux.setNombreEspecie("NOMBRE");
+		
+		mm.setNombreEspecie("Silla");
+		mm.setCantidadPatas(9);
+		System.out.println("Mira esta mnascota rara: " + mm);
+		mm = new Animal();
+		mm = aux;
+	}
+
 	public static void hallarIntegralDeEcuacion(String expresion, int x) {
 		int r = num1 + num2;
 		System.out.println(

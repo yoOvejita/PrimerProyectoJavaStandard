@@ -1,8 +1,13 @@
 package com.pepe;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.pepe.animales.Animal;
+import com.pepe.animales.Mascota;
+import com.pepe.animales.Planta;
+import com.pepe.animales.SerVivo;
 
 public class Principal {
 	static int num1, num2;
@@ -104,6 +109,63 @@ public class Principal {
 		haciendoAlgoConUnObjeto(mascota3);
 		System.out.println("Mi animal es: " + mascota3);
 		
+		//Herencia
+		System.out.println("Herencia ");
+		com.pepe.animales.Mascota perro = new com.pepe.animales.Mascota();
+		perro.moverse();
+		perro.setNombreEspecie("Perro");
+		perro.setNombrePropio("Rintintin");
+		System.out.println("El perro es: " + perro);
+		
+		Object objeto = perro;
+		Object[] arregloObjetos = new Object[3];
+		arregloObjetos[0] = perro;
+		arregloObjetos[1] = "hola";
+		arregloObjetos[2] = false;
+		
+		for(int i = 0; i < 3; i++)
+			System.out.println("El objeto es: " + arregloObjetos[i]);
+		
+		Animal an = new Mascota();
+		an.setNombreEspecie("perro");
+		Mascota ms = (Mascota)an;
+		
+		ms.setNombrePropio("Snoopy");
+		System.out.println("La mascota es: " + ms);
+		Animal an2 = ms;
+		System.out.println("El animal es: " + an2);
+		//Mascota mmm = new Animal();//No funcviona
+		
+		//Agregando interfaces
+		System.out.println("Interfaces ");
+		Mascota masc = new Mascota();
+		masc.respirar();
+		
+		Planta coca = new Planta();
+		
+		SerVivo[] ser = {masc, coca};
+		
+		ser[0].respirar();
+		
+		SerVivo unSer = coca;
+		List<String> listita = new LinkedList<String>();
+		listita.add("uno");
+		listita.add("dos");
+		listita.add("tres");
+		listita.remove(1);//removiendo "dos"
+		listita.remove("dos");
+		
+		for(String elemento : listita)
+			System.out.println(elemento);
+		
+		for(int i = 0 ; i < listita.size(); i++)
+			System.out.println(listita.get(i));
+		
+		
+		//Estructuras de datos
+		//Listas: uno despues de otro
+		//Colas: (FIFO - First In, First Out)
+		//Pilas: (LIFO - Last In, First Out)
 	}
 	
 	private static void haciendoAlgoConUnObjeto(Animal mm) {

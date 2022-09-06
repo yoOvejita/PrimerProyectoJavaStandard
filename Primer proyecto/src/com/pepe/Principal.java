@@ -3,6 +3,7 @@ package com.pepe;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 import com.pepe.animales.Animal;
 import com.pepe.animales.Mascota;
@@ -166,8 +167,90 @@ public class Principal {
 		//Listas: uno despues de otro
 		//Colas: (FIFO - First In, First Out)
 		//Pilas: (LIFO - Last In, First Out)
+		
+		//INFIX: X + Y
+		//PREFIX: + X Y
+		//POSTFIX: X Y +
+		
+		// 3 + 7 * ( 5 / 6 + 2 )
+		
+		
+		/*
+		 * 3 Y +
+		 * 3 [7 * ( 12 / 6 + 2 )] +
+		 * 3 7 ( 5 / 6 + 2 ) * +
+		 * 3 7 W 2 + * +
+		 * 3 7 5 6 / 2 + * +
+		 * 
+		 * POSTFIX:
+		 * PILA: 31
+		 * MANO: +
+		 * A:  3 
+		 * B: 28 
+		 * RES: 31
+		 * 
+		 * 
+		 * */
+		
+		String postfix = convertirInfixApostfix("3 + 5");
+		
 	}
 	
+	private static String convertirInfixApostfix(String infix) {
+		String post = "";
+		infix += " )";
+		String[] tokens = infix.split(" ");// 3, +, 5, )
+		Stack<String> pila = new Stack<String>();
+		pila.push("(");
+		int indice = 0;
+		/*
+		 * INFIX -> POSTFIX
+		 * 
+		 * 1. Agregamos un paréntesis de cierre a la expresión.
+		 * 2. Agregamos un paréntesis de apertura a la pila.
+		 * 3. Recorremos elemento a elemento nuestro infix.
+		 * 4. Mientras la pila no este vacía, sacamos  a la mano el primer elemento de la expresión:
+		 * 	si en la mano hay un número: lo ponemos en la expresión postfix
+		 *  si en la mano hay un paréntesis apertura: ponemos en la  pila
+		 *  si en la mano hay un operador:
+		 *  	si en la cima de la pila hay un operador:
+		 *  		si el op de la pila es mayor o igual, lo sacamos y ponemos en postfix
+		 *  	repetimos hasta que no hayan operadores o hasta que el op sea menor
+		 *  	finalmente poner el operador de la mano en la pila.
+		 *  si en la mano hay un paréntesis cierre: sacamos los elementos de la pìla, uno a uno,
+		 *    y los concatenamos a postfix, esto hasta encontrar un paréntesis de apertura.
+		 * 
+		 * 
+		 * */
+		String mano = ""; 
+		while(pila.size() > 0) {
+			mano = tokens[indice++];
+			switch(mano) {
+			case "(":
+				pila.push(mano);
+				break;
+			case ")":
+				break;
+			case "+": case "-": case "*": case "/": case "%": case "^":
+				while(esOperador(pila.peek())) {
+					if(esOperadorMayor(pila.peek(),mano)) {
+						post += " " + pila.pop();
+					}
+					else
+						break;
+				}
+				
+				break;
+			default://es un numero
+				post += " " + mano;
+				break;
+			}
+		}
+		
+		
+		return post;
+	}
+
 	private static void haciendoAlgoConUnObjeto(Animal mm) {
 		Animal aux = new Animal();
 		aux.setNombreEspecie("NOMBRE");

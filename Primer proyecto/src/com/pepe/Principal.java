@@ -191,11 +191,81 @@ public class Principal {
 		 * 
 		 * 
 		 * */
+		Scanner leer2 = new Scanner(System.in);
+		System.out.println("INFIX a POSTFIX\nIntroduzca una expresion aritmetica:");
+		String infix = leer2.nextLine();
 		
-		String postfix = convertirInfixApostfix("3 + 5");
+		String postfix = convertirInfixApostfix(infix);
+		System.out.println("Postfix: " + postfix);
+		int resultadoOp = operarPostfix(postfix);
+		System.out.println("Resultado: " + resultadoOp);
 		
 	}
 	
+	private static int operarPostfix(String postfix) {
+		/*
+		 * si son numeros -> a la pila
+		 * si son operadores --> operamos con numeros de la pila
+		 * 
+		 * 
+		 * */
+		String[][][] matriz = new String[3][3][8];
+		String[][] tablero = new String[4][3];
+		/*
+		 * [][][] [][][] [][][]
+		 * [][][] [][][] [][][]
+		 * [][][] [][][] [][][] 
+		 * [][][] [][][] [][][]
+		 * 
+		 * [][][][]
+		 * [][][][]
+		 * [][][][]
+		 * 	 * */
+		
+		Stack<Integer> pila = new Stack<Integer>();
+		String[] tokens = postfix.trim().split(" ");// "3 4 +"
+		for(String token : tokens) {
+			switch(token) {
+			case "+": case "-": case "*": case "/": case "%": case "^":
+				int r = 0, x , y;
+				y = pila.pop();
+				x = pila.pop();
+				switch(token) {
+					case "+":
+						r = x + y;
+					break;
+					case "-":
+						r = x - y;
+					break;
+					case "*":
+						r = x * y;
+					break;
+					case "/":
+						r = x / y;
+					break;
+					case "%":
+						r = x % y;
+					break;
+					case "^":
+						r = (int)Math.pow(x, y);
+					break;
+				}
+				
+				pila.push(r);
+				
+				
+				break;
+				
+				
+			default://es numero
+				pila.push(Integer.parseInt(token));
+				break;
+			}
+			
+		}
+		return pila.pop();
+	}
+
 	private static String convertirInfixApostfix(String infix) {
 		String post = "";
 		infix += " )";
@@ -203,6 +273,8 @@ public class Principal {
 		Stack<String> pila = new Stack<String>();
 		pila.push("(");
 		int indice = 0;
+		
+		
 		/*
 		 * INFIX -> POSTFIX
 		 * 
@@ -230,6 +302,11 @@ public class Principal {
 				pila.push(mano);
 				break;
 			case ")":
+				String elem = pila.pop();
+				while(!elem.equals("(")) {
+					post += " " + elem;
+					elem = pila.pop();
+				}
 				break;
 			case "+": case "-": case "*": case "/": case "%": case "^":
 				while(esOperador(pila.peek())) {
@@ -239,7 +316,7 @@ public class Principal {
 					else
 						break;
 				}
-				
+				pila.push(mano);
 				break;
 			default://es un numero
 				post += " " + mano;
@@ -249,6 +326,27 @@ public class Principal {
 		
 		
 		return post;
+	}
+
+	private static boolean esOperadorMayor(String op1, String op2) {
+		/*
+		 * ^
+		 * / % *
+		 * + -
+		 * */
+		if("+-".contains(op1))
+			return false;
+		if(op2.equals("^"))
+			return false;
+		if("/*%".contains(op1)&&"/*%^".contains(op2))
+			return false;
+		return true;
+	}
+
+	private static boolean esOperador(String simbolo) {
+		// ( 1...9000 + -...
+		String operadores = "+-*/%^";
+		return operadores.contains(simbolo);
 	}
 
 	private static void haciendoAlgoConUnObjeto(Animal mm) {

@@ -3,6 +3,15 @@ package com.pepe.animales;
 public class Mascota extends Animal implements SerVivo {
 	String nombrePropio;
 	boolean vacunadoContraRabia;
+	
+	public Mascota() {
+		
+	}
+	public Mascota(int cantPatas, String nombreEsp, String nombrePropio, boolean vacunado) {
+		super(cantPatas,nombreEsp);
+		this.nombrePropio = nombrePropio;
+		vacunadoContraRabia = vacunado;
+	}
 	public String getNombrePropio() {
 		return nombrePropio;
 	}

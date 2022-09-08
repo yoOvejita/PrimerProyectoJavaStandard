@@ -1,7 +1,10 @@
 package com.pepe;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -9,6 +12,7 @@ import com.pepe.animales.Animal;
 import com.pepe.animales.Mascota;
 import com.pepe.animales.Planta;
 import com.pepe.animales.SerVivo;
+import com.pepe.genericas.UnaClaseGenerica;
 
 public class Principal {
 	static int num1, num2;
@@ -200,6 +204,39 @@ public class Principal {
 		int resultadoOp = operarPostfix(postfix);
 		System.out.println("Resultado: " + resultadoOp);
 		
+		//Clases genéricas
+		List miLista = new ArrayList();
+		miLista.add(15);
+		miLista.add(postfix);
+		miLista.add(masc);
+		
+		List<String> miListaDeCadenas = new ArrayList<String>();
+		miListaDeCadenas.add("ccc");
+		miListaDeCadenas.add(masc + "");
+		
+		List<Mascota> listaMas = new LinkedList<Mascota>();
+		listaMas.add(masc);
+		listaMas.add(new Mascota(4,"Perro","Snoopy", false));
+		
+		for(Mascota m : listaMas)
+			System.out.println(m);
+		new Mascota().comer();
+		
+		Map<Integer, String> mapa = new HashMap<Integer, String>();
+		mapa.put(72011111, "Pepe");
+		mapa.put(72011111, "Sofia");
+		mapa.put(2353535, "Pepe");
+		
+		
+		System.out.println(mapa.size());
+		System.out.println(mapa.get(2353535));
+		System.out.println(mapa.get(72011111));
+		
+		UnaClaseGenerica<Integer,Mascota> clase1 = new UnaClaseGenerica<Integer,Mascota>();
+		clase1.setObjetos(23,listaMas.get(1));
+		System.out.println(clase1.getObjeto(23));
+		
+		System.out.println(UnaClaseGenerica.devolverModificado(masc));
 	}
 	
 	private static int operarPostfix(String postfix) {

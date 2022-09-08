@@ -14,6 +14,11 @@ public class Animal {
 		cantidadPatas = cantPatas;
 	}
 	
+	public Animal(int cant, String nombreEsp) {
+		cantidadPatas = cant;
+		nombreEspecie = nombreEsp;
+	}
+	
 	public int getCantidadPatas() {
 		return cantidadPatas;
 	}

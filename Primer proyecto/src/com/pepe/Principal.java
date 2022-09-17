@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -50,10 +51,11 @@ public class Principal {
 		System.out.println("Por favor, introduce un numero:");
 		Scanner leer = new Scanner(System.in);
 		resultado = leer.nextInt();
-		if(resultado > 50) {
+		if(resultado > 50 ) 
+		System.out.println("Es mayoría");
 			
-			System.out.println("Es mayoría");
-		}
+			
+		
 		
 		System.out.println("Fin de la condicional");
 		
@@ -99,6 +101,11 @@ public class Principal {
 		else
 			System.out.println("No son para nada iguales.");
 		
+		if("abc" == "xyz")
+			System.out.println();
+		
+		if("abc".equals("xyz"))
+			System.out.println();
 		
 		//Otro ejemplo
 		Animal mascota3 = mascota1;
@@ -237,6 +244,10 @@ public class Principal {
 		System.out.println(clase1.getObjeto(23));
 		
 		System.out.println(UnaClaseGenerica.devolverModificado(masc));
+		
+		Queue<Mascota> cola = new LinkedList<Mascota>();
+		cola.add(new Mascota());//añadimos a la cola
+		Mascota a =cola.poll();//extraemos de la cola
 	}
 	
 	private static int operarPostfix(String postfix) {
@@ -246,7 +257,7 @@ public class Principal {
 		 * 
 		 * 
 		 * */
-		String[][][] matriz = new String[3][3][8];
+		String[][][] cubo = new String[3][3][8];
 		String[][] tablero = new String[4][3];
 		/*
 		 * [][][] [][][] [][][]
@@ -399,6 +410,7 @@ public class Principal {
 
 	public static void hallarIntegralDeEcuacion(String expresion, int x) {
 		int r = num1 + num2;
+		expresion = "abc";
 		System.out.println(
 				"Estoy en el metodo hallarIntegralDeEcuacion y r es: " + r);
 	}

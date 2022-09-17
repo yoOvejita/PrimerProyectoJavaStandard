@@ -18,7 +18,18 @@ public class Animal {
 		cantidadPatas = cant;
 		nombreEspecie = nombreEsp;
 	}
+	public Animal(String nEspecie) {
+		nombreEspecie = nEspecie;
+	}
+
 	
+	public Animal(int cantidadPatas, boolean tienePelaje, String nombreEspecie, String nombrePropietario) {
+		this.cantidadPatas = cantidadPatas;
+		this.tienePelaje = tienePelaje;
+		this.nombreEspecie = nombreEspecie;
+		this.nombrePropietario = nombrePropietario;
+	}
+
 	public int getCantidadPatas() {
 		return cantidadPatas;
 	}

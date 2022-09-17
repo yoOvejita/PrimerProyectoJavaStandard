@@ -40,4 +40,8 @@ public class Mascota extends Animal implements SerVivo {
 		return 20;
 	}
 	
+	public boolean comparar(Mascota otro) {
+		return cantidadPatas == otro.cantidadPatas;
+	}
+	
 }
